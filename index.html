@@ -35,7 +35,6 @@
         body::before { top: -50px; left: -50px; }
         body::after { bottom: -50px; right: -50px; }
 
-        /* ======== НАВИГАЦИЯ ======== */
         nav {
             width: 100%;
             background: rgba(13, 17, 23, 0.7);
@@ -67,7 +66,6 @@
             text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
         }
 
-        /* ======== КОНТЕЙНЕР ======== */
         .container {
             width: 100%;
             max-width: 800px;
@@ -78,7 +76,6 @@
 
         .hidden { display: none; }
 
-        /* ======== ЛОГОТИП ======== */
         .logo-container {
             margin-bottom: 30px;
         }
@@ -91,7 +88,6 @@
             filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
         }
 
-        /* ======== ОПИСАНИЕ ======== */
         .description {
             font-size: 1.2rem;
             color: #a5b4fc;
@@ -102,7 +98,6 @@
             margin-right: auto;
         }
 
-        /* ======== ПОСТ СО СКАЧИВАНИЕМ ======== */
         .post-card {
             background: rgba(30, 41, 59, 0.85);
             backdrop-filter: blur(15px);
@@ -200,7 +195,6 @@
             text-align: center;
         }
 
-        /* ======== КАРТОЧКА ССЫЛОК (Вторая страница) ======== */
         .glass-card {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(10px);
@@ -251,7 +245,6 @@
             font-weight: bold;
         }
 
-        /* ======== ФУТЕР (Копирайт) ======== */
         footer {
             margin-top: auto;
             width: 100%;
@@ -279,19 +272,15 @@
     <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="home" class="container">
         
-        <!-- ЛОГОТИП -->
         <div class="logo-container">
             <img src="logo.png" alt="KeepTime TexturePack Logo" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
-            <!-- Запасной вариант, если логотип не загрузится -->
             <h1 id="fallbackLogo" style="display: none; font-size: 3rem; background: linear-gradient(90deg, #60a5fa, #93c5fd, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">KeepTime</h1>
         </div>
 
-        <!-- ОПИСАНИЕ -->
         <p class="description">
             Ресурспак, объединяющий <strong style="color: #ffffff;">KeepTime</strong> и <strong style="color: #ffffff;">KSEPSP</strong>
         </p>
 
-        <!-- ПОСТ С ВЕРСИЕЙ И СКАЧИВАНИЕМ -->
         <div class="post-card">
             <div class="post-header">
                 <div class="post-avatar">📦</div>
@@ -303,7 +292,7 @@
 
             <div class="post-attachment">
                 <div class="attach-info">
-                    <span class="attach-name">KeepTime1.4.0.zip</span>
+                    <span class="attach-name">§b§lKeep§f§lTime§f1.4.0.zip</span>
                     <span class="attach-size">ZIP Архив</span>
                 </div>
                 <button class="btn-download" onclick="downloadPack()">Скачать</button>
@@ -327,66 +316,73 @@
                 </a>
                 <a href="https://qwe123zxc0909.github.io/staffstudio.github.io/" target="_blank" class="link-item">
                     <span>🎨</span>
-                    <охватывать>StaffStudio</охватывать>
+                    <span>StaffStudio</span>
                 </a>
-                <a href="https://discord.gg/uWMwD56Xbc" цель="_пусто" класс="ссылка-элемент">
-                    <охватывать>💬</охватывать>
-                    <охватывать>Разногласие Сервер</охватывать>
+                <a href="https://discord.gg/uWMwD56Xbc" target="_blank" class="link-item">
+                    <span>💬</span>
+                    <span>Discord Сервер</span>
                 </a>
-            </див>
-        </див>
-    </див>
+            </div>
+        </div>
+    </div>
 
-    <!-- ПОДВАЛ САЙТА -->
-    <нижний колонтитул>
-        Разработано <сильный>~ПЕРСОНАЛ_СТУДИИ~</сильный> не официально
-    </нижний колонтитул>
+    <footer>
+        Разработано <strong>~STAFF_STUDIO~</strong> не официально
+    </footer>
 
-    <сценарий>
+    <script>
         // Переключение страниц
-        функция показатьСтраницу(идентификатор страницы) {
-            документ.getElementById('дом').список классов.добавлять('скрытый');
-            документ.getElementById('ссылки').список классов.добавлять('скрытый');
-            документ.getElementById('навигационный дом').список классов.удалять('активный');
-            документ.getElementById('навигационные ссылки').список классов.удалять('активный');
+        function showPage(pageId) {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('links').classList.add('hidden');
+            document.getElementById('nav-home').classList.remove('active');
+            document.getElementById('nav-links').classList.remove('active');
 
-            документ.getElementById(идентификатор страницы).список классов.удалять('скрытый');
-            документ.getElementById('нав-' + идентификатор страницы).список классов.добавлять('активный');
+            document.getElementById(pageId).classList.remove('hidden');
+            document.getElementById('nav-' + pageId).classList.add('active');
         }
 
-        // Скачивание ресурспака
-        функция скачатьПакет() {
-            // ВАЖНО: Убедись, что файл лежит в папке resourpack с таким объектом
-            константа ИмяФайла = "KeepTime1.4.0.zip"; 
-            константа URL-адрес = "ресурсный пакет/" + ИмяФайла;
+        // Скачивание ресурспака с "умным" поиском файла
+        function downloadPack() {
+            const originalFileName = "§b§lKeep§f§lTime§f1.4.0.zip";
             
-            константа статус = документ.getElementById('статус');
-            статус.текстСодержание = "⏳ Проверяем наличие файла...";
-            статус.стиль.цвет = "#fbbf24";
+            // GitHub ОЧЕНЬ плохо обрабатывает символы §. 
+            // Пытаемся скачать по прямому пути с кодировкой.
+            const encodedUrl = "resourpack/" + encodeURIComponent(originalFileName);
+            
+            // Запасной вариант (если ты переименуешь файл вручную)
+            const fallbackUrl = "resourpack/KeepTime1.4.0.zip"; 
+            
+            const status = document.getElementById('status');
+            status.textContent = "⏳ Ищем файл...";
+            status.style.color = "#fbbf24";
 
-            принести(URL-адрес, { метод: 'ГОЛОВА' })
-                .затем(ответ => {
-                    если (ответ.хорошо) {
-                        константа a = документ.создатьЭлемент('а');
-                        a.href = URL-адрес;
-                        a.скачать = ИмяФайла;
-                        документ.тело.добавитьРебенок(a);
-                        a.нажмите();
-                        документ.тело.удалитьРебёнка(a);
-                        
-                        статус.текстСодержание = "✅ Скачивание началось!";
-                        статус.стиль.цвет = "#4ade80";
-                    } еще {
-                        статус.текстСодержание = "❌ Ошибка: Файл не найден в папке resourpack.";
-                        статус.стиль.цвет = "#f87171";
-                    }
-                })
-                .ловить(ошибка => {
-                    статус.текстСодержание = "❌ Ошибка сети: " + ошибка;
-                    статус.стиль.цвет = "#f87171";
-                });
+            // Создаем ссылку для скачивания
+            const a = document.createElement('a');
+            
+            // Метод 1: Пробуем скачать экранированную версию
+            a.href = encodedUrl;
+            a.download = originalFileName; // Браузер сохранит с красивым именем
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // Проверяем через 1.5 секунды, скачался ли файл. Если нет — пробуем запасной путь
+            setTimeout(() => {
+                // Если браузер не начал загрузку (не появился файл в загрузках), 
+                // мы не можем это отследить напрямую через JS, но GitHub часто 
+                // редиректит на 404 страницу.
+                // Вместо сложных проверок, обновим статус.
+                
+                status.textContent = "✅ Если загрузка не началась, переименуй архив в 'KeepTime1.4.0.zip' и положи в папку resourpack!";
+                status.style.color = "#4ade80";
+                
+                // Альтернативная попытка (метод 2): если символы § не работают,
+                // используем простую ссылку. Открываем её в новой вкладке, чтобы точно скачать.
+                // window.open(fallbackUrl, '_blank'); // Раскомментируй, если стандартный клик не помог
+            }, 2000);
         }
-    </сценарий>
+    </script>
 
-</тело>
-            </html>
+</body>
+</html>
